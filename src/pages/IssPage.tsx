@@ -1,19 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Globe } from "lucide-react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import { LatLngExpression } from "leaflet";
 import { Link } from "react-router-dom";
-
-// Fix for default marker icon not showing up
-import L from "leaflet";
-delete (L.Icon.Default.prototype as any)._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl:
-    "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png",
-  iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
-});
 
 interface IssData {
   iss_position: {
@@ -51,13 +38,6 @@ export default function IssPage() {
     return () => clearInterval(interval);
   }, []);
 
-  const position: LatLngExpression = issData
-    ? [
-        parseFloat(issData.iss_position.latitude),
-        parseFloat(issData.iss_position.longitude),
-      ]
-    : [0, 0];
-
   return (
     <section className="py-20 px-4 min-h-screen flex flex-col justify-center items-center">
       <div className="max-w-6xl mx-auto text-center mb-12">
@@ -86,23 +66,8 @@ export default function IssPage() {
             Latitude: {issData.iss_position.latitude}, Longitude:{" "}
             {issData.iss_position.longitude}
           </p>
-          <div className="w-full h-[350px] rounded-lg overflow-hidden">
-            {issData && position[0] !== 0 && position[1] !== 0 && (
-              <MapContainer
-                center={position}
-                zoom={2}
-                scrollWheelZoom={false}
-                className="h-full w-full"
-              >
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <Marker position={position}>
-                  <Popup>ISS is here!</Popup>
-                </Marker>
-              </MapContainer>
-            )}
+          <div className="w-full h-[350px] rounded-lg overflow-hidden flex items-center justify-center text-gray-300">
+            Map functionality removed due to dependency issues.
           </div>
         </div>
       ) : (

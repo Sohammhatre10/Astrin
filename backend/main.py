@@ -80,7 +80,7 @@ You're capable of retrieving live cosmic data via external tools. Respond with c
                 data = response.json()
                 return data["choices"][0]["message"]["content"]
             else:
-                return "⚠️ Cosmic interference! Unable to reach Astrin's thought stream."
+                return "Cosmic interference! Unable to reach Astrin's thought stream."
     except Exception:
         return "🌌 Astrin lost signal in deep space. Please try again shortly."
 
